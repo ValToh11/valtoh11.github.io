@@ -1,0 +1,955 @@
+/* 
+   PLAN DU FICHIER
+   1.  Variables (couleurs, polices)
+   2.  Reset
+   3.  Base (body, conteneur)
+   4.  Navigation
+   5.  Bannière
+   6.  À propos
+   7.  Projets
+   8.  Compétences
+   9.  Parcours (CV)
+   10. Contact
+   11. Pied de page
+   12. Animations & accessibilité
+   13. Responsive (≤ 780 px)
+*/
+
+
+/* 
+   1. VARIABLES
+*/
+:root {
+    /* Couleurs */
+    --fond:           #f4f1e9;
+    --fond-carte:     #fbfaf5;
+    --texte:          #1b1a16;
+    --texte-doux:     #46402f;
+    --olive:          #4b5320;
+    --olive-fonce:    #353b16;
+    --bordure:        #d9d2c2;
+    --bordure-claire: #e7e1d3;
+    --ambre:          #a5621a;
+
+    /* Polices */
+    --police-titre: Georgia, serif;
+    --police-texte: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    --police-code:  "Courier New", monospace;
+}
+
+
+/* 
+   2. RESET
+*/
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* 
+   3. BASE
+*/
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--police-texte);
+    color: var(--texte);
+    background: var(--fond);
+    line-height: 1.65;
+}
+
+.conteneur {
+    max-width: 1080px;
+    width: 90%;
+    margin: 0 auto;
+}
+
+/* Petite étiquette monospace réutilisée dans chaque section */
+.code {
+    font-family: var(--police-code);
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--olive);
+    text-align: center;
+}
+
+/* En-tête de section (numéro + titre h2) */
+section {
+    padding: 72px 0;
+}
+
+.titre-section {
+    margin-bottom: 44px;
+}
+
+.titre-section .code {
+    display: block;
+    margin-bottom: 12px;
+}
+
+.titre-section h2 {
+    font-family: var(--police-titre);
+    font-size: 2.1rem;
+}
+
+/* Boutons globaux */
+.bouton {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-weight: 600;
+    padding: 13px 22px;
+    border: 1px solid var(--olive);
+    cursor: pointer;
+    border-radius: 40px;
+}
+
+.bouton-plein {
+    background: var(--olive);
+    color: #fff;
+}
+
+.bouton-plein:hover {
+    background: var(--olive-fonce);
+}
+
+.bouton-contour {
+    background: none;
+    color: var(--olive);
+}
+
+.bouton-contour:hover {
+    background: #ece6d6;
+}
+
+
+/* 4.
+  NAVIGATION 
+*/
+header.barre-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--fond);
+    border-bottom: 1px solid var(--bordure);
+}
+
+.barre-nav .conteneur {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+}
+
+.marque {
+    font-family: var(--police-code);
+    font-weight: bold;
+    color: var(--texte);
+}
+
+.marque b {
+    color: var(--olive);
+}
+
+nav.principale {
+    display: flex;
+    gap: 30px;
+}
+
+nav.principale a {
+    font-weight: 500;
+    color: var(--texte-doux);
+}
+
+nav.principale a:hover {
+    color: var(--texte);
+}
+
+.bouton-menu {
+    display: none;
+    background: none;
+    border: 1px solid var(--bordure);
+    padding: 8px 10px;
+    cursor: pointer;
+    font-family: var(--police-code);
+    color: var(--texte);
+}
+
+
+/* 
+   5. BANNIÈRE
+*/
+.banniere {
+    padding: 84px 0 64px;
+    border-bottom: 1px solid var(--bordure-claire);
+}
+
+.grille-banniere {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 54px;
+    align-items: center;
+}
+
+.banniere h1 {
+    font-family: var(--police-titre);
+    font-size: 3.4rem;
+    line-height: 1.05;
+    margin-bottom: 24px;
+}
+
+.banniere h1 .accent {
+    color: var(--olive);
+}
+
+.banniere .surtitre {
+    margin-bottom: 22px;
+}
+
+.banniere .accroche {
+    font-size: 1.2rem;
+    color: var(--texte-doux);
+    max-width: 54ch;
+    margin-bottom: 34px;
+    text-align: justify;
+}
+
+.actions-banniere {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-bottom: 18px;
+}
+
+/* Point vert clignotant "disponible" */
+.statut {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--police-code);
+    font-size: 0.78rem;
+    color: var(--texte-doux);
+}
+
+.point {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--olive);
+    animation: clignote 2s infinite;
+}
+
+/* Photo portrait */
+.portrait {
+    position: relative;
+    width: 280px;
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+/* Cadre décoratif olive décalé derrière la photo */
+.portrait::before {
+    content: "";
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    right: -16px;
+    bottom: -16px;
+    border: 2px solid var(--olive);
+    z-index: 0;
+}
+
+.portrait .cadre {
+    position: relative;
+    z-index: 1;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    border: 1px solid var(--bordure);
+    background: var(--fond-carte);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.portrait .cadre img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.portrait .apercu {
+    text-align: center;
+    padding: 24px;
+    color: var(--texte-doux);
+    font-family: var(--police-code);
+    font-size: 0.76rem;
+    line-height: 1.7;
+}
+
+.portrait .apercu b {
+    display: block;
+    color: var(--olive);
+    margin-bottom: 8px;
+}
+
+
+/* 
+   6. À PROPOS
+ */
+.apropos {
+    border-bottom: 1px solid var(--bordure-claire);
+}
+
+.grille-apropos {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 54px;
+    align-items: start;
+}
+
+.texte-apropos p {
+    color: var(--texte-doux);
+    margin-bottom: 18px;
+    max-width: 60ch;
+    text-align: justify;
+}
+
+.texte-apropos p strong {
+    color: var(--texte);
+}
+
+.fiches {
+    border: 1px solid var(--bordure);
+    background: var(--fond-carte);
+    padding: 8px 22px;
+}
+
+.fiche {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 15px 0;
+    border-bottom: 1px solid var(--bordure-claire);
+}
+
+.fiche:last-child {
+    border-bottom: none;
+}
+
+.fiche .cle {
+    font-family: var(--police-code);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    color: var(--olive);
+}
+
+.fiche .valeur {
+    font-weight: 600;
+    text-align: right;
+}
+
+
+/* 
+   7. PROJETS
+*/
+.projets {
+    border-bottom: 1px solid var(--bordure-claire);
+}
+
+/* --- Carte en vedette --- */
+.en-vedette {
+    border: 1px solid var(--bordure);
+    background: var(--fond-carte);
+    margin-bottom: 30px;
+    box-shadow: 0 2px 8px transparent;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.en-vedette:hover {
+    border-color: var(--olive);
+    box-shadow: 0 4px 18px rgba(75, 83, 32, 0.14);
+}
+
+.tete-vedette {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 16px;
+    align-items: center;
+    padding: 16px 26px;
+    border-bottom: 1px solid var(--bordure-claire);
+}
+
+.corps-vedette {
+    padding: 32px 26px 36px;
+}
+
+.corps-vedette h3 {
+    font-family: var(--police-titre);
+    font-size: 1.85rem;
+    margin-bottom: 6px;
+}
+
+.corps-vedette .role {
+    font-family: var(--police-code);
+    font-size: 0.82rem;
+    color: var(--texte-doux);
+    margin-bottom: 18px;
+}
+
+.corps-vedette p {
+    color: var(--texte-doux);
+    max-width: 66ch;
+    margin-bottom: 14px;
+    text-align: justify;
+}
+
+.corps-vedette ul {
+    list-style: none;
+    margin: 16px 0 22px;
+    max-width: 66ch;
+}
+
+.corps-vedette li {
+    position: relative;
+    padding-left: 24px;
+    margin-bottom: 9px;
+    color: var(--texte-doux);
+    text-align: justify;
+}
+
+.corps-vedette li::before {
+    content: "›";
+    position: absolute;
+    left: 4px;
+    color: var(--olive);
+    font-weight: bold;
+}
+
+/* --- Badges et étiquettes (carte + vedette) --- */
+.ref {
+    font-family: var(--police-code);
+    font-size: 0.74rem;
+    color: var(--olive);
+    font-weight: 600;
+}
+
+.etiquette {
+    font-family: var(--police-code);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border: 1px solid var(--olive);
+    border-radius: 20px;
+    color: var(--olive);
+}
+
+.etiquette.ambre {
+    border-color: var(--ambre);
+    color: var(--ambre);
+}
+
+.technologies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 22px;
+}
+
+.puce {
+    font-family: var(--police-code);
+    font-size: 0.74rem;
+    background: #efeadc;
+    border: 1px solid var(--bordure-claire);
+    padding: 5px 11px;
+}
+
+.liens {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+.lien-bouton {
+    font-family: var(--police-code);
+    font-size: 0.82rem;
+    color: var(--olive);
+    padding: 8px 14px;
+    border: 1px solid var(--olive);
+}
+
+.lien-bouton:hover {
+    background: var(--olive);
+    color: #fff;
+}
+
+.lien-bouton.discret {
+    color: var(--texte-doux);
+    border-color: var(--bordure);
+}
+
+.lien-bouton.discret:hover {
+    background: var(--texte);
+    color: #fff;
+}
+
+/* --- Grille des cartes secondaires --- */
+.grille {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+}
+
+.carte {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--bordure);
+    background: var(--fond-carte);
+    padding: 26px;
+    box-shadow: 0 2px 8px transparent;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.carte:hover {
+    border-color: var(--olive);
+    box-shadow: 0 4px 18px rgba(75, 83, 32, 0.14);
+}
+
+.tete-carte {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+.carte h3 {
+    font-family: var(--police-titre);
+    font-size: 1.3rem;
+    margin-bottom: 4px;
+}
+
+.carte .role {
+    font-family: var(--police-code);
+    font-size: 0.76rem;
+    color: var(--texte-doux);
+    margin-bottom: 14px;
+}
+
+.carte p {
+    color: var(--texte-doux);
+    font-size: 0.97rem;
+    margin-bottom: 16px;
+}
+
+
+/*
+   8. COMPÉTENCES
+*/
+.competences {
+    border-bottom: 1px solid var(--bordure-claire);
+}
+
+.grille-competences {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+}
+
+.col-competence {
+    border: 1px solid var(--bordure);
+    background: var(--fond-carte);
+    padding: 24px;
+}
+
+.col-competence h4 {
+    font-family: var(--police-code);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    color: var(--olive);
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--bordure-claire);
+}
+
+.col-competence ul {
+    list-style: none;
+}
+
+.col-competence li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 11px;
+}
+
+.col-competence li span.niveau {
+    margin-left: auto;
+    font-family: var(--police-code);
+    font-size: 0.68rem;
+    color: var(--texte-doux);
+}
+
+.pastille {
+    width: 7px;
+    height: 7px;
+    background: var(--olive);
+}
+
+
+/*
+   9. PARCOURS (CV)
+*/
+.cv {
+    border-bottom: 1px solid var(--bordure-claire);
+}
+
+.cv-exp {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 54px;
+}
+
+.cv-grille {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 48px;
+    align-items: stretch;
+    margin-top: 40px;
+}
+
+.cv-colonne {
+    border: 1px solid var(--bordure);
+    background: var(--fond-carte);
+    padding: 28px;
+}
+
+.cv-colonne h4 {
+    font-family: var(--police-code);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    color: var(--olive);
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--bordure-claire);
+    margin: 34px 0 20px;
+}
+
+.cv-colonne h4:first-child {
+    margin-top: 0;
+}
+
+.cv-entree {
+    margin-bottom: 26px;
+    padding-bottom: 26px;
+    border-bottom: 1px solid var(--bordure-claire);
+}
+
+.cv-entree:last-of-type {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.cv-date {
+    display: block;
+    font-family: var(--police-code);
+    font-size: 0.72rem;
+    color: var(--olive);
+    margin-bottom: 4px;
+}
+
+.cv-poste {
+    font-weight: 700;
+    font-size: 1rem;
+    margin: 0 0 4px;
+    color: var(--texte);
+}
+
+.cv-lieu {
+    display: block;
+    font-family: var(--police-code);
+    font-size: 0.76rem;
+    color: var(--texte-doux);
+    margin-bottom: 8px;
+}
+
+.cv-entree ul {
+    list-style: none;
+    margin-top: 8px;
+}
+
+.cv-entree li {
+    position: relative;
+    padding-left: 16px;
+    font-size: 0.9rem;
+    color: var(--texte-doux);
+    margin-bottom: 4px;
+}
+
+.cv-entree li::before {
+    content: "›";
+    position: absolute;
+    left: 2px;
+    color: var(--olive);
+}
+
+.cv-interets {
+    list-style: none;
+}
+
+.cv-interets li {
+    position: relative;
+    padding-left: 18px;
+    margin-bottom: 10px;
+    color: var(--texte-doux);
+}
+
+.cv-interets li::before {
+    content: "›";
+    position: absolute;
+    left: 4px;
+    color: var(--olive);
+    font-weight: bold;
+}
+
+.cv-interets strong {
+    color: var(--texte);
+}
+
+
+/*
+   10. CONTACT
+*/
+.contact {
+    padding: 78px 0 0;
+}
+
+.contact-bloc {
+    text-align: center;
+    max-width: 60ch;
+    margin: 0 auto;
+}
+
+.contact-bloc h2 {
+    font-family: var(--police-titre);
+    font-size: 2.2rem;
+    margin: 14px 0 18px;
+}
+
+.contact-bloc p {
+    color: var(--texte-doux);
+    margin-bottom: 30px;
+}
+
+.contact-boutons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    justify-content: center;
+}
+
+#ouvrir-contact {
+    margin-bottom: 24px;
+}
+
+/* Modale */
+.modale {
+    position: fixed;
+    top: 6vh;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    border: 1px solid var(--bordure);
+    background: var(--fond-carte);
+    color: var(--texte);
+    padding: 36px 32px 32px;
+    max-width: 480px;
+    width: 90%;
+    max-height: 90vh;
+    overflow: auto;
+    text-align: left;
+}
+
+.modale::backdrop {
+    background: rgba(27, 26, 22, 0.5);
+}
+
+.modale h3 {
+    font-family: var(--police-titre);
+    font-size: 1.5rem;
+    margin-bottom: 18px;
+}
+
+.modale-fermer {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: var(--texte-doux);
+}
+
+.modale-fermer:hover {
+    color: var(--texte);
+}
+
+/* Formulaire de contact */
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    font-family: var(--police-texte);
+    font-size: 1rem;
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--bordure);
+    background: var(--fond);
+    color: var(--texte);
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: var(--olive);
+}
+
+.contact-form textarea {
+    resize: vertical;
+}
+
+.contact-form button {
+    align-self: start;
+}
+
+.contact-message {
+    margin-top: 14px;
+    font-size: 0.95rem;
+}
+
+.contact-message.succes {
+    color: var(--olive);
+}
+
+.contact-message.erreur {
+    color: #a33;
+}
+
+
+/*
+   11. PIED DE PAGE
+*/
+.pied {
+    margin-top: 70px;
+    border-top: 1px solid var(--bordure);
+    padding: 26px 0;
+}
+
+.pied .conteneur {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 14px;
+    font-family: var(--police-code);
+    font-size: 0.78rem;
+    color: var(--texte-doux);
+}
+
+.pied a {
+    text-decoration: none;
+    color: var(--texte-doux);
+}
+
+.pied a:hover {
+    color: var(--ambre);
+}
+
+
+/*
+   12. ANIMATIONS & ACCESSIBILITÉ
+*/
+@keyframes clignote {
+    50% { opacity: 0.3; }
+}
+
+.apparition {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s, transform 0.6s;
+}
+
+.apparition.visible {
+    opacity: 1;
+    transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .apparition {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
+
+
+/*
+   13. RESPONSIVE (≤ 780 px)
+*/
+@media (max-width: 780px) {
+
+    nav.principale {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        gap: 0;
+        background: var(--fond);
+        border-bottom: 1px solid var(--bordure);
+    }
+
+    nav.principale.ouvert {
+        display: flex;
+    }
+
+    nav.principale a {
+        padding: 13px 6%;
+        border-top: 1px solid var(--bordure-claire);
+    }
+
+    .bouton-menu {
+        display: inline-block;
+    }
+
+    .barre-nav .conteneur {
+        position: relative;
+    }
+
+    .grille-banniere,
+    .grille-apropos,
+    .cv-grille {
+        grid-template-columns: 1fr;
+    }
+
+    /* Photo remontée en tête de section sur mobile */
+    .portrait {
+        order: -1;
+    }
+
+    .cv-exp {
+        grid-template-columns: 1fr;
+    }
+
+    .banniere h1 {
+        font-size: 2.4rem;
+    }
+}
