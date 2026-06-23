@@ -360,6 +360,37 @@ nav.principale a:hover {
 .projets {
     border-bottom: 1px solid var(--bordure-claire);
 }
+.modale-image{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--bordure);
+  background: var(--fond-carte);
+  max-width: 90vw;          
+  max-height: 90vh;
+}
+.modale-image::backdrop{
+  background: rgba(27, 26, 22, 0.6);
+}
+.modale-image img{
+  display: block;
+  max-width: 100%;
+  max-height: 90vh;         
+}
+.modale-image .modale-fermer{
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background: var(--fond-carte);
+  border: 1px solid var(--bordure);
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  color: var(--texte);
+}
 
 /* --- Carte en vedette --- */
 .en-vedette {

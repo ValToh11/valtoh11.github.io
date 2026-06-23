@@ -44,3 +44,15 @@ if (modale && boutonOuvrir) {
     if (e.target === modale) modale.close();
   });
 }
+// Pop-up d'aperçu du projet
+const modaleApercu = document.getElementById('modale-apercu');
+const ouvrirApercu = document.getElementById('ouvrir-apercu');
+const fermerApercu = document.getElementById('fermer-apercu');
+
+if (modaleApercu && ouvrirApercu) {
+  ouvrirApercu.addEventListener('click', () => modaleApercu.showModal());
+  fermerApercu.addEventListener('click', () => modaleApercu.close());
+  modaleApercu.addEventListener('click', (e) => {
+    if (e.target === modaleApercu) modaleApercu.close();
+  });
+}
